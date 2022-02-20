@@ -1,6 +1,10 @@
 package com.kodilla.testing.shape;
 
 import org.junit.jupiter.api.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -84,7 +88,7 @@ public class ShapeCollectorTestSuite {
 
             //When
             shape.getFigure(0);
-            String result = "circle";
+            Circle result = new Circle("circle", 8.6);
 
             //Then
             assertEquals(result, shape.getFigure(0));
@@ -117,12 +121,16 @@ public class ShapeCollectorTestSuite {
             shape.addFigure(circle2);
             shape.addFigure(circle3);
 
+
             //When
-            shape.showFigures();
-            String result = "circle1 circle2 circle3";
+            List resultList = new ArrayList();
+            resultList.add(circle1);
+            resultList.add(circle2);
+            resultList.add(circle3);
+
 
             //Then
-            assertEquals(result, shape.showFigures());
+            assertEquals(resultList, shape.showFigures());
         }
     }
 
@@ -186,7 +194,7 @@ public class ShapeCollectorTestSuite {
 
             //When
             shape.getFigure(0);
-            String result = "square";
+            Square result = new Square("square", 6.0);
 
             //Then
             assertEquals(result, shape.getFigure(0));
@@ -215,17 +223,20 @@ public class ShapeCollectorTestSuite {
             Circle square2 = new Circle("square2", 9.0);
             Circle square3 = new Circle("square3", 6.8);
             ShapeCollector shape = new ShapeCollector();
-
             shape.addFigure(square1);
             shape.addFigure(square2);
             shape.addFigure(square3);
 
+
             //When
-            shape.showFigures();
-            String result = "square1 square2 square3";
+            List resultList = new ArrayList();
+            resultList.add(square1);
+            resultList.add(square2);
+            resultList.add(square3);
+
 
             //Then
-            assertEquals(result, shape.showFigures());
+            assertEquals(resultList, shape.showFigures());
         }
     }
 
@@ -296,6 +307,7 @@ public class ShapeCollectorTestSuite {
         }
 
 
+
         @Test
         void TestGetTriangleNotExisting(){
             //Given
@@ -311,6 +323,7 @@ public class ShapeCollectorTestSuite {
         }
 
 
+
         @Test
         void TestShowTriangles(){
             //Given
@@ -322,12 +335,16 @@ public class ShapeCollectorTestSuite {
             shape.addFigure(triangle2);
             shape.addFigure(triangle3);
 
+
             //When
-            shape.showFigures();
-            String result = "triangle1 triangle2 triangle3";
+            List resultList = new ArrayList();
+            resultList.add(triangle1);
+            resultList.add(triangle2);
+            resultList.add(triangle3);
+
 
             //Then
-            assertEquals(result, shape.showFigures());
+            assertEquals(resultList, shape.showFigures());
         }
     }
 }
