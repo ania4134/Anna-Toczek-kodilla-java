@@ -8,17 +8,8 @@ public final class World {
 
     List<Continent> continents = new ArrayList<>();
 
-    public void ListOfContinents() {
-        Continent Europe = new Continent();
-        Continent Asia = new Continent();
-        Continent Africa = new Continent();
-        Continent SouthAmerica = new Continent();
-        Continent NorthAmerica = new Continent();
-        continents.add(Europe);
-        continents.add(Asia);
-        continents.add(Africa);
-        continents.add(NorthAmerica);
-        continents.add(SouthAmerica);
+    public void addContinent(Continent continent) {
+        continents.add(continent);
     }
 
     public List<Continent> getContinents(){
@@ -34,13 +25,4 @@ public final class World {
                 .reduce(BigDecimal.ZERO, (sum, current) -> sum = sum.add(current));
         return totalPeopleQuantity;
     }
-
-//    public static void main(String[] args) {
-//        World world = new World();
-//        world.getPeopleQuantity();
-//        Continent c = new Continent();
-//        c.addCountries();
-//        c.getEuropeCountries();
-//        world.getContinents();
-//    }
 }
