@@ -10,5 +10,4 @@ public class Instruction {
         System.out.println("klawisz x - zakończenie gry poprzedzone pytaniem \"Czy na pewno zakończyć grę?\", ");
         System.out.println("klawisz n - uruchomienie gry od nowa poprzedzone pytaniem \"Czy na pewno zakończyć aktualną grę?\", ");
     }
-
 }
