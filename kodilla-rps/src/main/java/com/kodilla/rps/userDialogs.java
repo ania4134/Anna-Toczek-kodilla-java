@@ -51,10 +51,8 @@ public class userDialogs {
         }
     }
 
-    public static void roundStart() {
-        int roundNumber = 1;
+    public static void roundStart(int roundNumber) {
         System.out.println("Rozpoczynamy rundę " + roundNumber);
-        roundNumber++;
     }
 
     public static Integer getChoice() {
@@ -71,6 +69,24 @@ public class userDialogs {
             } catch (Exception e) {
                 System.out.println("zła odpowiedź - podaj wartość liczbową");
             }
+        }
+    }
+
+    public static void showChoices(int choice1, int choice2) {
+        System.out.println("Wybrałeś " + choice1 + ", przeciwnik wybrał " + choice2);
+    }
+
+    public static void showRoundStatistics(int numbersOfRoundWonByGamer1, int numbersOfRoundWonByGamer2) {
+        System.out.println("\nBieżący wynik gry:  " + numbersOfRoundWonByGamer1 + " : " + numbersOfRoundWonByGamer2);
+    }
+
+    public static void showGameStatistics(int numberOfRoundWonByGamer1, int numberOfRoundWonByGamer2, String name) {
+        if(numberOfRoundWonByGamer1 > numberOfRoundWonByGamer2) {
+            System.out.println("Wygrałeś całą grę z wynikiem  " + numberOfRoundWonByGamer1 + " : " + numberOfRoundWonByGamer2);
+            System.out.println("Gratulacje " + name + "! ");
+        } else {
+            System.out.println("Końcowy wnik: " + numberOfRoundWonByGamer1 + " : " + numberOfRoundWonByGamer2);
+            System.out.println("Przegrałeś grę :( ");
         }
     }
 }
