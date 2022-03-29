@@ -1,10 +1,11 @@
 package com.kodilla.rps;
 
+import static com.kodilla.rps.Instruction.gameInstruction;
+
 public class RpsRunner {
 
     public static void main(String[] args) {
-        Instruction instruction = new Instruction();
-        instruction.gameInstruction();
+        gameInstruction();
         Game game = new Game();
         game.game();
     }

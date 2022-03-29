@@ -1,12 +1,11 @@
 package com.kodilla.rps;
-import java.util.Scanner;
 
 public class Game {
 
     String name;
-    int numbersOfRoundsWon;
-    int numbersOfRoundWonByGamer1 = 0;
-    int numbersOfRoundWonByGamer2 = 0;
+    int numberOfRoundsWon;
+    int numberOfRoundWonByGamer1 = 0;
+    int numberOfRoundWonByGamer2 = 0;
     int roundNumber = 1;
     boolean end = false;
     int choice1;
@@ -15,15 +14,11 @@ public class Game {
     int max = 3;
 
     public void game() {
-        Scanner scanner = new Scanner(System.in);
-        Game game = new Game();
-
         name = userDialogs.getUserName();
-        numbersOfRoundsWon = userDialogs.getNumbersOfRoundsWon();
+        numberOfRoundsWon = userDialogs.getNumbersOfRoundsWon();
 
         while (!end) {
             userDialogs.roundStart(roundNumber);
-
             choice1 = userDialogs.getChoice();
             choice2 = (int) (Math.random() * (max - min + 1) + min);
 
@@ -32,37 +27,34 @@ public class Game {
             } else if ((choice1 == 1 && choice2 == 3) || (choice1 == 2 && choice2 == 1) || (choice1 == 3 && choice2 == 2)) {
                 userDialogs.showChoices(choice1, choice2);
                 System.out.println("Wygrałeś rundę " + roundNumber + "!");
-                numbersOfRoundWonByGamer1++;
+                numberOfRoundWonByGamer1++;
             } else {
                 userDialogs.showChoices(choice1, choice2);
                 System.out.println("Przegrałeś rundę " + roundNumber + ".");
-                numbersOfRoundWonByGamer2++;
+                numberOfRoundWonByGamer2++;
             }
-            userDialogs.showRoundStatistics(numbersOfRoundWonByGamer1, numbersOfRoundWonByGamer2);
-            game.checkWinner(numbersOfRoundsWon, numbersOfRoundWonByGamer1, numbersOfRoundWonByGamer2);
+            userDialogs.showRoundStatistics(numberOfRoundWonByGamer1, numberOfRoundWonByGamer2);
+            checkWinner(numberOfRoundsWon, numberOfRoundWonByGamer1, numberOfRoundWonByGamer2, name);
             roundNumber++;
         }
     }
 
-    private void checkWinner(int numbersOfRoundsWon, int numbersOfRoundWonByGamer1, int numbersOfRoundWonByGamer2) {
-        if (numbersOfRoundWonByGamer1 == numbersOfRoundsWon) {
-            userDialogs.showGameStatistics(numbersOfRoundWonByGamer1, numbersOfRoundWonByGamer2, name);
-            askingAboutNextGameOrEnd();
-        } else if (numbersOfRoundWonByGamer2 == numbersOfRoundsWon) {
-            userDialogs.showGameStatistics(numbersOfRoundWonByGamer1, numbersOfRoundWonByGamer2, name);
-            askingAboutNextGameOrEnd();
+    private void checkWinner(int numberOfRoundsWon, int numberOfRoundWonByGamer1, int numberOfRoundWonByGamer2, String name) {
+        if (numberOfRoundWonByGamer1 == numberOfRoundsWon || numberOfRoundWonByGamer2 == numberOfRoundsWon) {
+            userDialogs.showGameStatistics(numberOfRoundWonByGamer1, numberOfRoundWonByGamer2, name);
+            askAboutNextGameOrEnd();
         }
     }
 
-    public void askingAboutNextGameOrEnd() {
+    private void askAboutNextGameOrEnd() {
         if (userDialogs.askAboutEnd()) {
             System.out.println("Koniec gry");
             end = true;
         } else {
-            numbersOfRoundsWon = userDialogs.getNumbersOfRoundsWon();
-            game();
+            numberOfRoundsWon = userDialogs.getNumbersOfRoundsWon();
+            roundNumber = 0;
+            numberOfRoundWonByGamer1 = 0;
+            numberOfRoundWonByGamer2 = 0;
         }
     }
-
-
 }

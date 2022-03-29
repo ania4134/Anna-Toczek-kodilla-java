@@ -23,7 +23,7 @@ public class userDialogs {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Podaj ilość wygranych rund, po których ma nastąpić zwycięstwo: ");
+            System.out.println("\nPodaj ilość wygranych rund, po których ma nastąpić zwycięstwo: ");
             String s = scanner.nextLine();
             try {
                 int n = Integer.parseInt(s);
@@ -42,17 +42,17 @@ public class userDialogs {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Podaj swoje imię: ");
+            System.out.println("\nPodaj swoje imię: ");
             String name = scanner.nextLine().toUpperCase();
             if (name.length() > 2 && name.length() < 10)
                 return name;
             else
-                System.out.println("Imie powinno składać sie z minimum 3 oraz maxymalnie 9 znaków. Spróbuj jeszcze raz");
+                System.out.println("Imie powinno składać sie z minimum 3 oraz maksymalnie 9 znaków. Spróbuj jeszcze raz");
         }
     }
 
     public static void roundStart(int roundNumber) {
-        System.out.println("Rozpoczynamy rundę " + roundNumber);
+        System.out.println("\nRozpoczynamy rundę " + roundNumber);
     }
 
     public static Integer getChoice() {
@@ -77,15 +77,15 @@ public class userDialogs {
     }
 
     public static void showRoundStatistics(int numbersOfRoundWonByGamer1, int numbersOfRoundWonByGamer2) {
-        System.out.println("\nBieżący wynik gry:  " + numbersOfRoundWonByGamer1 + " : " + numbersOfRoundWonByGamer2);
+        System.out.println("Bieżący wynik gry   " + numbersOfRoundWonByGamer1 + " : " + numbersOfRoundWonByGamer2);
     }
 
     public static void showGameStatistics(int numberOfRoundWonByGamer1, int numberOfRoundWonByGamer2, String name) {
-        if(numberOfRoundWonByGamer1 > numberOfRoundWonByGamer2) {
-            System.out.println("Wygrałeś całą grę z wynikiem  " + numberOfRoundWonByGamer1 + " : " + numberOfRoundWonByGamer2);
+        if (numberOfRoundWonByGamer1 > numberOfRoundWonByGamer2) {
+            System.out.println("\nWygrałeś całą grę z wynikiem  " + numberOfRoundWonByGamer1 + " : " + numberOfRoundWonByGamer2);
             System.out.println("Gratulacje " + name + "! ");
         } else {
-            System.out.println("Końcowy wnik: " + numberOfRoundWonByGamer1 + " : " + numberOfRoundWonByGamer2);
+            System.out.println("Końcowy wnik  " + numberOfRoundWonByGamer1 + " : " + numberOfRoundWonByGamer2);
             System.out.println("Przegrałeś grę :( ");
         }
     }
