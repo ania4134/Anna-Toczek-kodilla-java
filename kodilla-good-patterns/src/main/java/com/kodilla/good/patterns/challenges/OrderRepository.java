@@ -4,5 +4,5 @@ import java.time.LocalDateTime;
 
 public interface OrderRepository {
 
-     void createOrderRepository(OrderRequest orderRequest );
+     void createOrderRepository(Customer customer, Item item, LocalDateTime orderTime);
 }

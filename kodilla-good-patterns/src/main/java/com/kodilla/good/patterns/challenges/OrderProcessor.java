@@ -12,11 +12,14 @@ public class OrderProcessor {
         this.orderRepository = orderRepository;
     }
 
-    public rentalDto process(final OrderRequest orderRequest) {
+    public orderDto process(final OrderRequest orderRequest) {
         boolean isOrdered = orderService.order(orderRequest.getCustomer(), orderRequest.getItem(), orderRequest.getOrderTime());
         if(isOrdered) {
             informationService.inform(orderRequest.getCustomer());
-            orderRepository.createOrderRepository(orderRequest);
+            orderRepository.createOrderRepository(orderRequest.getCustomer(), orderRequest.getItem(), orderRequest.getOrderTime());
+            return new orderDto(orderRequest.getCustomer(), orderRequest.getItem(), true);
+        } else {
+            return new orderDto(orderRequest.getCustomer(), orderRequest.getItem(), false);
         }
     }
 }
