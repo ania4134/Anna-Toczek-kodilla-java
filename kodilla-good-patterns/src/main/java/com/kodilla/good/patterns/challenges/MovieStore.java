@@ -29,8 +29,7 @@ public class MovieStore {
     public void getBooksTitlesWithTranslationsInOneLine() {
 
         String result = getMovies().entrySet().stream()
-                .map(entry -> entry.getValue())
-                .map(Objects::toString)
+                .flatMap(entry -> entry.getValue().stream())
                 .collect(Collectors.joining("!", " ", " "));
 
         System.out.println(result);
