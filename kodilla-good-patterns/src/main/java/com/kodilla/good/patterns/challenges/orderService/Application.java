@@ -1,4 +1,4 @@
-package com.kodilla.good.patterns.challenges;
+package com.kodilla.good.patterns.challenges.orderService;
 
 public class Application {
     public static void main(String[] args) {
