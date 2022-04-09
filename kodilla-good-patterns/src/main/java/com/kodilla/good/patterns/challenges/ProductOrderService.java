@@ -1,25 +1,35 @@
 package com.kodilla.good.patterns.challenges;
 
-public class OrderProcessor {
+public class ProductOrderService implements OrderService {
 
     private InformationService informationService;
-    private OrderService orderService;
     private OrderRepository orderRepository;
 
-    public OrderProcessor(final InformationService informationService, final OrderService orderService, final OrderRepository orderRepository) {
+    public ProductOrderService(final InformationService informationService, final OrderRepository orderRepository) {
         this.informationService = informationService;
-        this.orderService = orderService;
         this.orderRepository = orderRepository;
     }
 
-    public orderDto process(final OrderRequest orderRequest) {
-        boolean isOrdered = orderService.order(orderRequest.getCustomer(), orderRequest.getItem(), orderRequest.getOrderTime());
+    public boolean order(OrderRequest orderRequest) {
+        boolean isAvailable = true;
+        if(isAvailable) {
+            System.out.println( "\n" + orderRequest.getCustomer().getName() + " " + orderRequest.getCustomer().getSurname()
+                    + " is ordering " + orderRequest.getItem().getName() + ", price: " + orderRequest.getItem().getPrice() + ".");
+            System.out.println("Order time: " + orderRequest.getOrderTime());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public OrderDto process(final OrderRequest orderRequest) {
+        boolean isOrdered = order(orderRequest);
         if(isOrdered) {
             informationService.inform(orderRequest.getCustomer());
             orderRepository.createOrderRepository(orderRequest.getCustomer(), orderRequest.getItem(), orderRequest.getOrderTime());
-            return new orderDto(orderRequest.getCustomer(), orderRequest.getItem(), true);
+            return new OrderDto(orderRequest.getCustomer(), orderRequest.getItem(), true);
         } else {
-            return new orderDto(orderRequest.getCustomer(), orderRequest.getItem(), false);
+            return new OrderDto(orderRequest.getCustomer(), orderRequest.getItem(), false);
         }
     }
 }

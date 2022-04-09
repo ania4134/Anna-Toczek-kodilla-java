@@ -1,8 +1,8 @@
-package com.kodilla.good.patterns.challenges.orderService;
-
-import java.time.LocalDateTime;
+package com.kodilla.good.patterns.challenges;
 
 public interface OrderService {
 
-     boolean order(final Customer customer, final Item item, LocalDateTime orderTime);
+     boolean order(OrderRequest orderRequest);
+
+     OrderDto process(OrderRequest orderRequest);
 }

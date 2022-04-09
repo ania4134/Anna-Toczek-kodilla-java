@@ -1,13 +1,26 @@
-package com.kodilla.good.patterns.challenges.orderService;
+package com.kodilla.good.patterns.challenges;
 
-public class orderDto {
+public class OrderDto {
 
-    public orderDto(Customer customer, Item item,  boolean isOrdered) {
+    private Customer customer;
+    private Item item;
+    private boolean isOrdered;
 
-        if(isOrdered) {
-            System.out.println("Order completed: " + item + ", " + customer);
-        } else {
-            System.out.println("Order failed: " + item + ", " + customer);
-        }
+    public OrderDto(final Customer customer, final Item item, boolean isOrdered) {
+        this.customer = customer;
+        this.item = item;
+        this.isOrdered = isOrdered;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public boolean isOrdered() {
+        return isOrdered;
     }
 }
