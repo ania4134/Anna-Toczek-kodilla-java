@@ -21,6 +21,4 @@ public class ExtraFoodShop implements Producer {
             return false;
         }
     }
-
-
 }
