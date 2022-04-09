@@ -1,7 +1,5 @@
 package com.kodilla.good.patterns.challenges.food2door;
 
-import com.kodilla.good.patterns.challenges.orderService.Customer;
-
 import java.time.LocalDateTime;
 
 public class OrderRequest {
