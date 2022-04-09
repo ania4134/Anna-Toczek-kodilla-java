@@ -1,7 +1,5 @@
 package com.kodilla.good.patterns.challenges.food2door;
 
-import com.kodilla.good.patterns.challenges.food2door.OrderRequest;
-
 public class OrderProcessor {
 
     private Producer producer;
@@ -15,7 +13,7 @@ public class OrderProcessor {
     }
 
     public boolean process(final OrderRequest orderRequest) {
-        boolean isOrdered = orderService.order(orderRequest.getCustomer(), orderRequest.getProduct(), orderRequest.getAmountOfProduct(), orderRequest.getProducer());
+        boolean isOrdered = orderService.order(orderRequest);
         if (isOrdered) {
             System.out.println("Order completed.");
             return true;

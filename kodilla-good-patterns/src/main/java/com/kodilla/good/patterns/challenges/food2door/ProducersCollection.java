@@ -23,6 +23,13 @@ public class ProducersCollection {
         return producer != null ? producer.hashCode() : 0;
     }
 
+    @Override
+    public String toString() {
+        return "ProducersCollection{" +
+                "producersSet=" + producersSet +
+                '}';
+    }
+
     public boolean addProducer(Producer producer) {
         producersSet.add(producer);
         return true;
@@ -33,7 +40,7 @@ public class ProducersCollection {
             producersSet.remove(producer);
             return true;
         } else {
-            System.out.println("Nie odnaleziono takiego producenta w bazie");
+            System.out.println("No data found");
             return false;
         }
     }

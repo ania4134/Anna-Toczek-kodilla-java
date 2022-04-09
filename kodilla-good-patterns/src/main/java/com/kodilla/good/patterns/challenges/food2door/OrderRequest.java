@@ -9,9 +9,9 @@ public class OrderRequest {
     private Product product;
     private int amountOfProduct;
     private Producer producer;
-    LocalDateTime timeOfOrder;
+    private LocalDateTime timeOfOrder;
 
-    public OrderRequest(Customer customer, Product product, int amountOfProduct, Producer producer, LocalDateTime timeOfOrder) {
+    public OrderRequest( Customer customer, Product product, int amountOfProduct, Producer producer, LocalDateTime timeOfOrder) {
         this.customer = customer;
         this.product = product;
         this.amountOfProduct = amountOfProduct;
