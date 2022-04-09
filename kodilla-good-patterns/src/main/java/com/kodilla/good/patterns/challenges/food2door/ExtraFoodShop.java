@@ -1,35 +1,26 @@
 package com.kodilla.good.patterns.challenges.food2door;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class ExtraFoodShop implements Producer {
 
     private String name = "Extra Food Shop";
-    private Set<Product> listOfProducts = new HashSet<>();
 
     @Override
     public String getName() {
         return name;
     }
 
-    @Override
-    public Set<Product> getListOfProducts() {
-        return listOfProducts;
-    }
+    public boolean process(OrderRequest orderRequest, OrderService orderService, StoreDatabase storeDatabase) {
+        System.out.println("Welcome to " + name + "! We are happy that our store was your choice.");
+        boolean isOrdered = orderService.order(orderRequest, storeDatabase);
 
-    public boolean addProduct(Product product) {
-        listOfProducts.add(product);
-        return true;
-    }
-
-    public boolean removeProduct(Product product) {
-        if(listOfProducts.contains(product)) {
-            listOfProducts.remove(product);
+        if (isOrdered) {
+            System.out.println("Order completed.");
             return true;
         } else {
-            System.out.println("No data found");
+            System.out.println("So sorry! Order failed.");
             return false;
         }
     }
+
+
 }

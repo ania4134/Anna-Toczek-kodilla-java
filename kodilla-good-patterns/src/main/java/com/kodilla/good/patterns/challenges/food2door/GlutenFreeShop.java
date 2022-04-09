@@ -1,33 +1,22 @@
 package com.kodilla.good.patterns.challenges.food2door;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class GlutenFreeShop implements Producer {
 
     private String name = "Gluten Free Shop";
-    private Set<Product> listOfProducts = new HashSet<>();
 
     @Override
     public String getName() {
         return name;
     }
 
-    public Set<Product> getListOfProducts() {
-        return listOfProducts;
-    }
-
-    public boolean addProduct(Product product) {
-        listOfProducts.add(product);
-        return true;
-    }
-
-    public boolean removeProduct(Product product) {
-        if(listOfProducts.contains(product)) {
-            listOfProducts.remove(product);
+    public boolean process(OrderRequest orderRequest, OrderService orderService, StoreDatabase storeDatabase) {
+        System.out.println("Hi there! "+ name + " is absolutely must buy shop at your area. We offer you local gluten free food. ");
+        boolean isOrdered = orderService.order(orderRequest, storeDatabase);
+        if (isOrdered) {
+            System.out.println("Order completed. Product will be dispatching within 12 h");
             return true;
         } else {
-            System.out.println("No data found");
+            System.out.println("So sorry! Order failed.");
             return false;
         }
     }

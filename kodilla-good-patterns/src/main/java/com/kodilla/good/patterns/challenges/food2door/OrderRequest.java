@@ -5,13 +5,13 @@ import com.kodilla.good.patterns.challenges.orderService.Customer;
 import java.time.LocalDateTime;
 
 public class OrderRequest {
-    private Customer customer;
+    private String customer;
     private Product product;
     private int amountOfProduct;
     private Producer producer;
     private LocalDateTime timeOfOrder;
 
-    public OrderRequest( Customer customer, Product product, int amountOfProduct, Producer producer, LocalDateTime timeOfOrder) {
+    public OrderRequest(String customer, Product product, int amountOfProduct, Producer producer, LocalDateTime timeOfOrder) {
         this.customer = customer;
         this.product = product;
         this.amountOfProduct = amountOfProduct;
@@ -19,7 +19,7 @@ public class OrderRequest {
         this.timeOfOrder = timeOfOrder;
     }
 
-    public Customer getCustomer() {
+    public String getCustomer() {
         return customer;
     }
 
@@ -37,5 +37,16 @@ public class OrderRequest {
 
     public LocalDateTime getTimeOfOrder() {
         return timeOfOrder;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderRequest{" +
+                "customer=" + customer +
+                ", product=" + product +
+                ", amountOfProduct=" + amountOfProduct +
+                ", producer=" + producer +
+                ", timeOfOrder=" + timeOfOrder +
+                '}';
     }
 }

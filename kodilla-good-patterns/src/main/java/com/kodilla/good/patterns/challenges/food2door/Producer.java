@@ -6,5 +6,5 @@ public interface Producer {
 
     String getName();
 
-    Set<Product> getListOfProducts();
+    boolean process(OrderRequest orderRequest, OrderService orderService, StoreDatabase storeDatabase);
 }
