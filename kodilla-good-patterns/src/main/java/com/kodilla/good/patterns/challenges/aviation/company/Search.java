@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 
 public class Search {
 
-    public String from;
-    public String to;
+    FlightDatabase flightDatabase = new FlightDatabase();
+    Flight firstFlight;
+    Flight nextFlight;
 
     public void flightsFrom(String city) {
-        FlightDatabase flightDatabase = new FlightDatabase();
 
         Set<Flight> listFlightFrom = flightDatabase.createFlightDatabase().stream().
                 filter(c -> c.getFrom().equals(city.toUpperCase())).
@@ -21,7 +21,6 @@ public class Search {
     }
 
     public void flightsTo(String city) {
-        FlightDatabase flightDatabase = new FlightDatabase();
 
         Set<Flight> listFlightTo = flightDatabase.createFlightDatabase().stream().
                 filter(c -> c.getTo().equals(city.toUpperCase())).
@@ -29,5 +28,23 @@ public class Search {
                 collect(Collectors.toSet());
 
         System.out.println("Flights to " + city + ":\n " + listFlightTo + "\n");
+    }
+
+    public void flightsThrough(String from, String through, String to) {
+
+        Set<Flight> listFlightFromThrough = flightDatabase.createFlightDatabase().stream().
+                filter(c -> c.getFrom().equals(from.toUpperCase()) && c.getTo().equals(through.toUpperCase())).
+                filter(d -> d.getDepartureTime().isAfter(LocalDateTime.now())).
+                collect(Collectors.toSet());
+
+        Set<Flight> listFlightThroughTo = flightDatabase.createFlightDatabase().stream().
+                filter(c -> c.getFrom().equals(through.toUpperCase()) && c.getTo().equals(to.toUpperCase())).
+                filter(d -> d.getDepartureTime().isAfter(LocalDateTime.now())).
+                collect(Collectors.toSet());
+
+        if (listFlightFromThrough.contains(firstFlight) && listFlightThroughTo.contains(nextFlight)
+                && firstFlight.getArrivalTime().isBefore(nextFlight.getDepartureTime())) {
+            System.out.println("Flight " + from + "--> " + through + "--> " + to + ": \n" + firstFlight + "\n" + nextFlight);
+        }
     }
 }

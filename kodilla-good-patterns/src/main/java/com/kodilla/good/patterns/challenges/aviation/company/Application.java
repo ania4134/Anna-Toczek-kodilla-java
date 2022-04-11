@@ -9,6 +9,7 @@ public class Application {
         Search search = new Search();
         search.flightsFrom("Wroclaw");
         search.flightsTo("Rzeszow");
+        search.flightsThrough("Wroclaw", "Rzeszow", "Warszawa-Modlin");
     }
 
 }
