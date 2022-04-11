@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FlightDatabase {
+public final class FlightDatabase {
 
-    Set<Flight> flightSet = new HashSet<>();
+    private Set<Flight> flightSet = new HashSet<>();
 
     public Set<Flight> createFlightDatabase() {
         Flight wroWmi = new Flight("WROCLAW", "WARSZAWA-MODLIN", LocalDateTime.of(2022,05,05,8,50),
@@ -27,8 +27,6 @@ public class FlightDatabase {
     }
 
     public Set<Flight> getFlightSet() {
-        return flightSet;
+        return new HashSet<>(flightSet);
     }
-
-
 }

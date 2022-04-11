@@ -40,13 +40,13 @@ public class Flight {
 
     @Override
     public String toString() {
-        return  from + " --> " + to +
+        return from + " --> " + to +
                 ", departureTime: " + departureTime +
                 ", arrivalTime: " + arrivalTime +
-                ", price=" + price + "PLN";
+                ", price=" + price + "PLN\n";
     }
 
-        @Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Flight)) return false;
