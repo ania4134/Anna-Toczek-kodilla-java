@@ -6,9 +6,7 @@ import java.util.stream.Collectors;
 
 public class Search {
 
-    Set<Flight> listThrough = new HashSet<>();
     FlightDatabase flightDatabase = new FlightDatabase();
-
 
     public Set<Flight> flightsFrom(String city) {
 
@@ -29,6 +27,7 @@ public class Search {
     }
 
     public Set<Flight> flightsThrough(String from, String through, String to) {
+        Set<Flight> listThrough = new HashSet<>();
 
         Set<Flight> listFlightFromThrough = flightDatabase.createFlightDatabase().stream()
                 .filter(c -> c.getFrom().equals(from.toUpperCase()) && c.getTo().equals(through.toUpperCase()))
@@ -37,7 +36,6 @@ public class Search {
         Set<Flight> listFlightThroughTo = flightDatabase.createFlightDatabase().stream()
                 .filter(c -> c.getFrom().equals(through.toUpperCase()) && c.getTo().equals(to.toUpperCase()))
                 .collect(Collectors.toSet());
-
         listThrough.addAll(listFlightFromThrough);
         listThrough.addAll(listFlightThroughTo);
 
