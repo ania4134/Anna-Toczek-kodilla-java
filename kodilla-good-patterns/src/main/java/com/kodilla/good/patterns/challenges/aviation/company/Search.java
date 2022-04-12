@@ -16,7 +16,6 @@ public class Search {
                 .filter(c -> c.getFrom().equals(city.toUpperCase()))
                 .collect(Collectors.toSet());
 
-        System.out.println("\nFlights from " + city + ":\n ");
         return listFlightFrom;
     }
 
@@ -26,7 +25,6 @@ public class Search {
                 .filter(c -> c.getTo().equals(city.toUpperCase()))
                 .collect(Collectors.toSet());
 
-        System.out.println("\nFlights to " + city + ":\n");
         return listFlightTo;
     }
 
@@ -43,7 +41,6 @@ public class Search {
         listThrough.addAll(listFlightFromThrough);
         listThrough.addAll(listFlightThroughTo);
 
-        System.out.println("Flight " + from + "--> " + through + "--> " + to + ": \n");
         return listThrough;
     }
 }

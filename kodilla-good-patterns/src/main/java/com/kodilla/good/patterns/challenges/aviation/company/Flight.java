@@ -40,10 +40,10 @@ public class Flight {
 
     @Override
     public String toString() {
-        return from + " --> " + to +
+        return "\n" + from + " --> " + to +
                 ", departureTime: " + departureTime +
                 ", arrivalTime: " + arrivalTime +
-                ", price=" + price + "PLN\n";
+                ", price=" + price + "PLN";
     }
 
     @Override
