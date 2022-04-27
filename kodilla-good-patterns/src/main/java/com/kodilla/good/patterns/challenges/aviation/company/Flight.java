@@ -43,7 +43,7 @@ public class Flight {
         return "\n" + from + " --> " + to +
                 ", departureTime: " + departureTime +
                 ", arrivalTime: " + arrivalTime +
-                ", price=" + price + "PLN";
+                ", price=" + price + " PLN";
     }
 
     @Override
