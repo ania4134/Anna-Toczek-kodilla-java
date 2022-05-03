@@ -10,13 +10,6 @@ public final class Bigmac {
     private final Sauce sauce;
     private List<Ingredient> ingredients;
 
-    public Bigmac(Bun bun, int burgers, Sauce sauce, List<Ingredient> ingredients) {
-        this.bun = bun;
-        this.burgers = burgers;
-        this.sauce = sauce;
-        this.ingredients = new ArrayList<>(ingredients);
-    }
-
     public static class BigmacBuilder {
         private Bun bun;
         private int burgers;
@@ -47,6 +40,13 @@ public final class Bigmac {
         public Bigmac build() {
             return new Bigmac(bun, burgers, sauce, ingredients);
         }
+    }
+
+    private Bigmac(final Bun bun, final int burgers, final Sauce sauce, List<Ingredient> ingredients) {
+        this.bun = bun;
+        this.burgers = burgers;
+        this.sauce = sauce;
+        this.ingredients = new ArrayList<>(ingredients);
     }
 
     public Bun getBun() {
