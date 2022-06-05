@@ -3,39 +3,71 @@ package com.kodilla.sudoku;
 public class SudokuGame {
     SudokuBoard board = new SudokuBoard();
 
+
     public boolean resolveSudoku() {
         UserDialogs.startGame();
         boolean result;
 
-        if (UserDialogs.isProvidedSudoku()) {
+        if (UserDialogs.getNumbers().containsKey("SUDOKU")) {
             sudokuAlgorithm();
             result = true;
         } else {
             UserDialogs.getNumbers();
-            if (ifNumbersAreCorrect())
-                board.setElementValue(UserDialogs.getNumbers().get("col"), UserDialogs.getNumbers().get("row"),
-                        UserDialogs.getNumbers().get("value"));
-            System.out.println(board);
+            if (ifNumbersAreCorrect()) {
+                System.out.println("dziala");
+                SudokuElement element = new SudokuElement();
+                board.setElementValue(UserDialogs.getNumbers().get("col"), UserDialogs.getNumbers().get("row"), element);
+                element.setValue(UserDialogs.getNumbers().get("value"));
+                System.out.println(element.getValue());
+            } else
+                UserDialogs.providedWrongNumbers();
             result = false;
         }
         return result;
     }
 
     private void sudokuAlgorithm() {
-        for(int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
-                if(board.getElement(col, row).getValue() == -1) {
-                    checkRows(col, row);
-                    checkCols(col, row);
-                    checkFields(col, row);
-                    if(board.getElement(col, row).getPossibleValues().size() == 1) {
-                        int value = board.getElement(col, row).getPossibleValues().stream().findAny().get();
-                        board.setElementValue(col, row, value);
+        SudokuElement element = new SudokuElement();
+        boolean result = true;
+
+        while (result == true && boardNotCompletelyFilled()) {
+            result = false;
+            for (int row = 0; row < 9; row++) {
+                for (int col = 0; col < 9; col++) {
+                    if (board.getElement(col, row).getValue() == -1) {
+                        checkRows(col, row);
+                        checkCols(col, row);
+                        checkFields(col, row);
+                        if (board.getElement(col, row).getPossibleValues().size() == 1) {
+                            int value = board.getElement(col, row).getPossibleValues().stream().findAny().get();
+                            board.setElementValue(col, row, element);
+                            element.setValue(value);
+                            result = true;
+                        }
                     }
                 }
             }
+            if (result == false) {
+                guessing();
+            }
+            if(!boardNotCompletelyFilled())
+                System.out.println(board);
         }
-        System.out.println(board);
+    }
+
+    private boolean boardNotCompletelyFilled() {
+        boolean result = false;
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (board.getElement(col, row).getValue() == -1)
+                    result = true;
+            }
+        }
+        return result;
+    }
+
+    private void guessing() {
+
     }
 
     private void checkRows(int col, int row) {

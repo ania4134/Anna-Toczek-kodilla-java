@@ -20,8 +20,8 @@ public class SudokuBoard {
         return cols.get(row).getRows().get(col);
     }
 
-    public void setElementValue(int col, int row, int value) {
-        getElement(col, row).value = value;
+    public void setElementValue(int col, int row, SudokuElement element) {
+        cols.get(col).getRows().set(row, element);
     }
 
     @Override
