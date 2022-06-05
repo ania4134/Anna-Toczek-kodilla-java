@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuRow {
-    List<SudokuElement> rows = new ArrayList<>();
+    List<SudokuElement> cols = new ArrayList<>();
 
     public SudokuRow() {
-        for(int col = 0; col < 9; col++) {
-            rows.add(new SudokuElement());
+        for(int row = 0; row < 9; row++) {
+            cols.add(new SudokuElement());
         }
     }
 
-    public List<SudokuElement> getRows() {
-        return rows;
+    public List<SudokuElement> getCols() {
+        return cols;
     }
 
     @Override
     public String toString() {
         String s = "|";
-        for (int col = 0; col <9; col++)
-            s += rows.get(col).toString() + "|";
+        for (int row = 0; row <9; row++)
+            s += cols.get(row).toString() + "|";
         s += "\n";
         return s;
     }

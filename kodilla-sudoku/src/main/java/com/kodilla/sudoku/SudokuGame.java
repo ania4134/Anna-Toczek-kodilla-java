@@ -1,10 +1,14 @@
 package com.kodilla.sudoku;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class SudokuGame {
     SudokuBoard board = new SudokuBoard();
 
 
-    public boolean resolveSudoku() {
+    public boolean resolveSudoku() throws CloneNotSupportedException {
         UserDialogs.startGame();
         boolean result;
 
@@ -26,7 +30,7 @@ public class SudokuGame {
         return result;
     }
 
-    private void sudokuAlgorithm() {
+    private void sudokuAlgorithm() throws CloneNotSupportedException {
         SudokuElement element = new SudokuElement();
         boolean result = true;
 
@@ -66,8 +70,28 @@ public class SudokuGame {
         return result;
     }
 
-    private void guessing() {
+    private void guessing() throws CloneNotSupportedException {
+        Backtrack backtrack = new Backtrack();
+        Random generator = new Random();
+        boolean fieldIsEmpty = true;
 
+        while(fieldIsEmpty) {
+            int col = generator.nextInt(10);
+            int row = generator.nextInt(10);
+            if (board.getElement(col, row).getValue() == -1) {
+                fieldIsEmpty = false;
+                int guessedCol = col;
+                int guessedRow = row;
+                int guessedValue = board.getElement(guessedCol, guessedRow).getPossibleValues()
+                        .stream().findAny().get().intValue();
+                backtrack.setGuessedCol(guessedCol);
+                backtrack.setGuessedRow(guessedRow);
+                backtrack.setGuessedValue(guessedValue);
+                SudokuElement element = new SudokuElement();
+                board.setElementValue(guessedCol, guessedRow, element);
+                element.setValue(guessedValue);
+            }
+        }
     }
 
     private void checkRows(int col, int row) {
