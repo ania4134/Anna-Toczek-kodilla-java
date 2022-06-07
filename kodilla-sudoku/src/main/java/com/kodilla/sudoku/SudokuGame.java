@@ -1,28 +1,25 @@
 package com.kodilla.sudoku;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class SudokuGame {
     SudokuBoard board = new SudokuBoard();
 
-
     public boolean resolveSudoku() throws CloneNotSupportedException {
-        UserDialogs.startGame();
         boolean result;
+        Map<String, Integer> numbers = UserDialogs.getNumbers();
+        SudokuElement element = new SudokuElement();
 
-        if (UserDialogs.getNumbers().containsKey("SUDOKU")) {
+        if (numbers.containsKey("SUDOKU")) {
             sudokuAlgorithm();
             result = true;
         } else {
-            UserDialogs.getNumbers();
-            if (ifNumbersAreCorrect()) {
-                System.out.println("dziala");
-                SudokuElement element = new SudokuElement();
-                board.setElementValue(UserDialogs.getNumbers().get("col"), UserDialogs.getNumbers().get("row"), element);
-                element.setValue(UserDialogs.getNumbers().get("value"));
-                System.out.println(element.getValue());
+            if (ifNumbersAreCorrect(numbers) && ifFieldIsEmpty(numbers.get("col"), numbers.get("row"))) {
+                board.setElement(numbers.get("col"), numbers.get("row"),
+                        element);
+                element.setValue(numbers.get("value"));
+                System.out.println(board);
             } else
                 UserDialogs.providedWrongNumbers();
             result = false;
@@ -31,10 +28,9 @@ public class SudokuGame {
     }
 
     private void sudokuAlgorithm() throws CloneNotSupportedException {
-        SudokuElement element = new SudokuElement();
         boolean result = true;
 
-        while (result == true && boardNotCompletelyFilled()) {
+        while (result && boardNotCompletelyFilled()) {
             result = false;
             for (int row = 0; row < 9; row++) {
                 for (int col = 0; col < 9; col++) {
@@ -44,19 +40,29 @@ public class SudokuGame {
                         checkFields(col, row);
                         if (board.getElement(col, row).getPossibleValues().size() == 1) {
                             int value = board.getElement(col, row).getPossibleValues().stream().findAny().get();
-                            board.setElementValue(col, row, element);
+                            SudokuElement element = new SudokuElement();
+                            board.setElement(col, row, element);
                             element.setValue(value);
                             result = true;
+                        } else if (board.getElement(col, row).getPossibleValues().size() == 0) {
+                            throwError();
                         }
                     }
+
                 }
             }
-            if (result == false) {
+            if (!result) {
                 guessing();
             }
-            if(!boardNotCompletelyFilled())
+            if(!boardNotCompletelyFilled()) {
+                System.out.println("Rozwiązane sudoku:");
                 System.out.println(board);
+            }
         }
+    }
+
+    private void throwError() {
+        System.out.println("Sudoku jest niepoprawne");
     }
 
     private boolean boardNotCompletelyFilled() {
@@ -79,23 +85,20 @@ public class SudokuGame {
             int col = generator.nextInt(10);
             int row = generator.nextInt(10);
             if (board.getElement(col, row).getValue() == -1) {
-                fieldIsEmpty = false;
-                int guessedCol = col;
-                int guessedRow = row;
-                int guessedValue = board.getElement(guessedCol, guessedRow).getPossibleValues()
+                int value = board.getElement(col, row).getPossibleValues()
                         .stream().findAny().get().intValue();
-                backtrack.setGuessedCol(guessedCol);
-                backtrack.setGuessedRow(guessedRow);
-                backtrack.setGuessedValue(guessedValue);
+                fieldIsEmpty = false;
+                backtrack.setGuessedCol(col);
+                backtrack.setGuessedRow(row);
+                backtrack.setGuessedValue(value);
                 SudokuElement element = new SudokuElement();
-                board.setElementValue(guessedCol, guessedRow, element);
-                element.setValue(guessedValue);
+                board.setElement(col, row, element);
+                element.setValue(value);
             }
         }
     }
 
     private void checkRows(int col, int row) {
-
         for(int i = 0; i < 9; i++) {
             if(board.getElement(col, i).getValue() != -1) {
                 int value = board.getElement(col, i).getValue();
@@ -105,7 +108,6 @@ public class SudokuGame {
     }
 
     private void checkCols(int col, int row) {
-
         for(int i = 0; i < 9; i++) {
             if(board.getElement(i, row).getValue() != -1) {
                 int value = board.getElement(i, row).getValue();
@@ -170,10 +172,10 @@ public class SudokuGame {
         }
     }
 
-    public boolean ifNumbersAreCorrect() {
-        int col = UserDialogs.getNumbers().get("col");
-        int row = UserDialogs.getNumbers().get("row");
-        int value = UserDialogs.getNumbers().get("value");
+    public boolean ifNumbersAreCorrect(Map<String, Integer> numbers) {
+        int col = numbers.get("col");
+        int row = numbers.get("row");
+        int value = numbers.get("value");
 
         if (isInBounds(col, row, value) && ifFieldIsEmpty(col, row))
             return true;
@@ -183,15 +185,13 @@ public class SudokuGame {
 
     public boolean isInBounds(int col, int row, int value) {
         boolean result = false;
-
-        if (col > 0 && col < 10 && row > 0 && row < 10 && value > 0 && value < 10)
+        if (col >= 0 && col < 10 && row >= 0 && row < 10 && value > 0 && value < 10)
             result = true;
         return result;
     }
 
     public boolean ifFieldIsEmpty(int col, int row) {
-        SudokuBoard sudokuBoard = new SudokuBoard();
-        if (sudokuBoard.getElement(col, row).value == -1)
+        if (board.getElement(col, row).value == -1)
             return true;
         else
             return false;

@@ -34,13 +34,12 @@ public class SudokuBoard extends Prototype<SudokuBoard> {
         return rows.get(col).getCols().get(row);
     }
 
-    public void setElementValue(int col, int row, SudokuElement element) {
+    public void setElement(int col, int row, SudokuElement element) {
         rows.get(row).getCols().set(col, element);
     }
 
     @Override
     public String toString() {
-        String e = "  ";
         String s = "|--------------------------|\n";
         for (int col = 0; col < 9; col++)
             s += rows.get(col).toString();

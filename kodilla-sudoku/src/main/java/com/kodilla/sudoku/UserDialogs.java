@@ -27,9 +27,12 @@ public class UserDialogs {
                 return data;
             } else {
                 try {
-                    int col = s.charAt(0);
-                    int row = s.charAt(2);
-                    int value = s.charAt(4);
+                    char colChar = s.charAt(0);
+                    char rowChar = s.charAt(2);
+                    char valueChar = s.charAt(4);
+                    int col = Character.getNumericValue(colChar);
+                    int row = Character.getNumericValue(rowChar);
+                    int value = Character.getNumericValue(valueChar);
                     data.put("col", col - 1);
                     data.put("row", row - 1);
                     data.put("value", value);

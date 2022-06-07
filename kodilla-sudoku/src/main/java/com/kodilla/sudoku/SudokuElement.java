@@ -30,7 +30,7 @@ public class SudokuElement {
     @Override
     public String toString() {
         String s;
-        s = (value == -1) ? "  " : "" + value;
+        s = (value == -1) ? "  " : value + " ";
         return s;
     }
 }
