@@ -9,7 +9,6 @@ public class SudokuGame {
     public boolean resolveSudoku() throws CloneNotSupportedException {
         boolean result;
         Map<String, Integer> numbers = UserDialogs.getNumbers();
-        SudokuElement element = new SudokuElement();
 
         if (numbers.containsKey("SUDOKU")) {
             sudokuAlgorithm();
@@ -17,8 +16,7 @@ public class SudokuGame {
         } else {
             if (ifNumbersAreCorrect(numbers) && ifFieldIsEmpty(numbers.get("col"), numbers.get("row"))) {
                 board.setElement(numbers.get("col"), numbers.get("row"),
-                        element);
-                element.setValue(numbers.get("value"));
+                        numbers.get("value"));
                 System.out.println(board);
             } else
                 UserDialogs.providedWrongNumbers();
@@ -40,9 +38,7 @@ public class SudokuGame {
                         checkFields(col, row);
                         if (board.getElement(col, row).getPossibleValues().size() == 1) {
                             int value = board.getElement(col, row).getPossibleValues().stream().findAny().get();
-                            SudokuElement element = new SudokuElement();
-                            board.setElement(col, row, element);
-                            element.setValue(value);
+                            board.setElement(col, row, value);
                             result = true;
                         } else if (board.getElement(col, row).getPossibleValues().size() == 0) {
                             throwError();
@@ -91,9 +87,8 @@ public class SudokuGame {
                 backtrack.setGuessedCol(col);
                 backtrack.setGuessedRow(row);
                 backtrack.setGuessedValue(value);
-                SudokuElement element = new SudokuElement();
-                board.setElement(col, row, element);
-                element.setValue(value);
+                SudokuElement element = new SudokuElement(value);
+                board.setElement(col, row, value);
             }
         }
     }

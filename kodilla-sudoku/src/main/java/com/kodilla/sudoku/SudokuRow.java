@@ -8,7 +8,7 @@ public class SudokuRow {
 
     public SudokuRow() {
         for(int row = 0; row < 9; row++) {
-            cols.add(new SudokuElement());
+            cols.add(new SudokuElement(SudokuElement.EMPTY));
         }
     }
 
