@@ -6,8 +6,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 @NamedNativeQuery(
         name = "Company.retrieveCompanyWIthGivenFirstThreeCharacters",
         query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME LIKE :PARAMETER ",
